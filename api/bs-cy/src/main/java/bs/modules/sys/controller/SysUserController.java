@@ -38,8 +38,7 @@ import java.util.Map;
 
 /**
  * 用户管理
- * 
- * @author Mark sunlightcs@gmail.com
+ *
  */
 @RestController
 @RequestMapping("/sys/user")

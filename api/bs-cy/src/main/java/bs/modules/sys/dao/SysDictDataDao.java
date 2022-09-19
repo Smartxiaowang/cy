@@ -16,9 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * 字典数据
- *
- * @author Mark sunlightcs@gmail.com
+ * 字典数
  */
 @Mapper
 public interface SysDictDataDao extends BaseDao<SysDictDataEntity> {

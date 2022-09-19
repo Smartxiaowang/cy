@@ -29,7 +29,6 @@ import java.util.Map;
 /**
  * 数据过滤
  *
- * @author Mark sunlightcs@gmail.com
  */
 public class DataFilterInterceptor implements InnerInterceptor {
 

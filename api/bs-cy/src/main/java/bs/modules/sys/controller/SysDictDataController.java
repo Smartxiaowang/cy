@@ -28,7 +28,6 @@ import java.util.Map;
 /**
  * 字典数据
  *
- * @author Mark sunlightcs@gmail.com
  */
 @RestController
 @RequestMapping("sys/dict/data")

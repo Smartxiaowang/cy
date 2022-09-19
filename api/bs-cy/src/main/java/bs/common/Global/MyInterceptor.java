@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @ClassName MyInterceptor
  * @Description token 拦截器
- * @Author Dear lin
- * @Date 16:22 2022/7/19
  * @Version 1.0
  **/
 @Component

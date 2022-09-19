@@ -9,8 +9,6 @@ import java.util.concurrent.Executors;
 /**
  * @ClassName ThreadPollHelp
  * @Description 线程池辅助类
- * @Author Dear lin
- * @Date 15:32 2022/7/19
  * @Version 1.0
  **/
 @Component

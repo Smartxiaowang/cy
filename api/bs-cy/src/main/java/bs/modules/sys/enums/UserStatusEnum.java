@@ -11,7 +11,6 @@ package bs.modules.sys.enums;
 /**
  * 用户状态
  *
- * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
 public enum UserStatusEnum {

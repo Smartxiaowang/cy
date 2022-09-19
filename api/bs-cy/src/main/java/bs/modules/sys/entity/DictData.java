@@ -14,7 +14,6 @@ import lombok.Data;
 /**
  *  字典数据
  *
- * @author Mark sunlightcs@gmail.com
  */
 @Data
 public class DictData {

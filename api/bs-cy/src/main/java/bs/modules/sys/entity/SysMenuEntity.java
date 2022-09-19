@@ -20,7 +20,6 @@ import java.util.Date;
 /**
  * 菜单管理
  *
- * @author Mark sunlightcs@gmail.com
  */
 @Data
 @EqualsAndHashCode(callSuper=false)

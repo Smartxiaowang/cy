@@ -14,7 +14,6 @@ import org.jsoup.safety.Whitelist;
 /**
  * XSS过滤工具类
  *
- * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
 public class XssUtils extends Whitelist {
@@ -66,13 +65,6 @@ public class XssUtils extends Whitelist {
             .addProtocols("cite", "cite", "http", "https")
             .addProtocols("q", "cite", "http", "https")
             .addProtocols("embed", "src", "http", "https");
-    }
-
-    public static void main(String[] args) {
-        StringBuilder html = new StringBuilder();
-        html.append("<a href=\"https://www.renren.io\" target=\"_blank\">人人开源</a>");
-
-        System.out.println(filter(html.toString()));
     }
 
 }

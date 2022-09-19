@@ -33,7 +33,6 @@ import java.util.Map;
 /**
  * 参数管理
  *
- * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
 @RestController

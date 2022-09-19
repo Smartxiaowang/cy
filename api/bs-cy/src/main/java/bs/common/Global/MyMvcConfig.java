@@ -11,8 +11,6 @@ import javax.annotation.PostConstruct;
 /**
  * @ClassName MyMvcConfig
  * @Description TODO
- * @Author Dear lin
- * @Date 16:24 2022/7/19
  * @Version 1.0
  **/
 @Configuration

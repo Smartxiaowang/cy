@@ -8,12 +8,8 @@ import org.springframework.web.client.HttpClientErrorException;
 /**
  * @ClassName GlobalExceptionHandler
  * @Description 全局异常拦截器
- * @Author Dear lin
- * @Date 17:10 2022/7/14
  * @Version 1.0
  **/
-
-
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

@@ -5,8 +5,6 @@ import java.util.UUID;
 /**
  * @ClassName Until
  * @Description 获取随机Salt
- * @Author Dear lin
- * @Date 12:30 2022/7/19
  * @Version 1.0
  **/
 public class SaltUntil {

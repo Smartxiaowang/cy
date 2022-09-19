@@ -5,7 +5,6 @@ import lombok.Data;
 /**
  * @ClassName CMSException
  * @Description 全局异常
- * @Author Dear lin
  * @Date 17:09 2022/7/14
  * @Version 1.0
  **/

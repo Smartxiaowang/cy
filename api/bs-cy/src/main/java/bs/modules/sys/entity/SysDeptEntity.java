@@ -17,8 +17,7 @@ import java.util.Date;
 
 /**
  * 部门管理
- * 
- * @author Mark sunlightcs@gmail.com
+ *
  */
 @Data
 @EqualsAndHashCode(callSuper=false)

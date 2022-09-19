@@ -8,8 +8,6 @@ import java.util.Map;
 /**
  * @ClassName R
  * @Description 统一全局返回参数
- * @Author Dear lin
- * @Date 17:05 2022/7/14
  * @Version 1.0
  **/
 @Data

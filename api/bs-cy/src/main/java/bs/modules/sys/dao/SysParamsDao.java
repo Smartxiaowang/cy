@@ -18,7 +18,6 @@ import java.util.List;
 /**
  * 参数管理
  *
- * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
 @Mapper

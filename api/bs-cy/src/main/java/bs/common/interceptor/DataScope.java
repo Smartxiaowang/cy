@@ -11,7 +11,6 @@ package bs.common.interceptor;
 /**
  * 数据范围
  *
- * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
 public class DataScope {

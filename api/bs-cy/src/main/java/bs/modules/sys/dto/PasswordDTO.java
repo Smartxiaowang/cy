@@ -18,7 +18,6 @@ import java.io.Serializable;
 /**
  * 修改密码
  *
- * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
 @Data

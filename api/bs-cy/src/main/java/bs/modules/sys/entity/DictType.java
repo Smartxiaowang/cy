@@ -17,7 +17,6 @@ import java.util.List;
 /**
  * 字典类型
  *
- * @author Mark sunlightcs@gmail.com
  */
 @Data
 public class DictType {

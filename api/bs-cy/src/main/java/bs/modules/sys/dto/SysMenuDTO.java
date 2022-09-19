@@ -27,7 +27,6 @@ import java.util.Date;
 /**
  * 菜单管理
  *
- * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
 @ApiModel(value = "菜单管理")

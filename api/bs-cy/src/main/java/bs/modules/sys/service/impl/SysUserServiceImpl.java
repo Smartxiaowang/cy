@@ -35,8 +35,7 @@ import java.util.Map;
 
 /**
  * 系统用户
- * 
- * @author Mark sunlightcs@gmail.com
+ *
  */
 @Service
 public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntity> implements SysUserService {
