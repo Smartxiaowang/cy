@@ -81,7 +81,6 @@ public class LoginController {
 
     /*
      * @Description: TODO
-     * @Author: Dear lin
      * @Param: [request, login]
      * @Return: bs.common.Global.R
      */
@@ -89,9 +88,6 @@ public class LoginController {
     @ApiOperation(value = "登录")
     public R login(HttpServletRequest request, @RequestBody LoginDTO login) {
         //效验数据
-        ExecutorService executorService = threadPoolHelp.executorService();
-        executorService.shutdownNow();
-        Set<String> wang = redisCache.keys("wang");
         ValidatorUtils.validateEntity(login);
 
         //验证码是否正确

@@ -15,7 +15,6 @@ import java.util.List;
 
 /**
  * 登录用户信息
- *
  */
 @Data
 public class UserDetail implements Serializable {

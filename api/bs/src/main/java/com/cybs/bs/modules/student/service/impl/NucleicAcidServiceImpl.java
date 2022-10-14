@@ -1,62 +1,46 @@
 package com.cybs.bs.modules.student.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cybs.bs.common.Global.R;
 import com.cybs.bs.common.utils.BaseServiceImpl;
 import com.cybs.bs.common.utils.Constant;
 import com.cybs.bs.common.utils.ConvertUtils;
 import com.cybs.bs.common.utils.PageData;
 import com.cybs.bs.modules.student.dao.BodyTemperatureDao;
+import com.cybs.bs.modules.student.dao.NucleicAcidDao;
 import com.cybs.bs.modules.student.entity.BodyTemperatureEntity;
+import com.cybs.bs.modules.student.entity.NucleicAcidEntity;
 import com.cybs.bs.modules.student.service.BodyTemperatureService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.cybs.bs.modules.student.service.NucleicAcidService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionSynchronization;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @ClassName OwnerServiceImpl
- * @Description TODO
- * @Author Dear lin
- * @Date 17:21 2022/7/29
- * @Version 1.0
- **/
+
 @Service
-public class BodyTemperatureServiceImpl extends BaseServiceImpl<BodyTemperatureDao, BodyTemperatureEntity> implements BodyTemperatureService {
+public class NucleicAcidServiceImpl extends BaseServiceImpl<NucleicAcidDao, NucleicAcidEntity> implements NucleicAcidService {
     @Autowired
     private BodyTemperatureDao bodyTemperatureDao;
 
-    @Override
-    @Transactional
-    public R insertByEntity(BodyTemperatureEntity bodyTemperatureEntity) {
-        try {
-            bodyTemperatureDao.insertbyEntity(bodyTemperatureEntity);
-            return R.ok();
-        }catch (Exception e) {
-            return R.error().message("当日已登记");
-        }
-    }
+
 
     @Override
-    public PageData<BodyTemperatureEntity> page(Map<String, Object> params) {
-        QueryWrapper<BodyTemperatureEntity> objectQueryWrapper = new QueryWrapper<BodyTemperatureEntity>();
+    public PageData<NucleicAcidEntity> page(Map<String, Object> params) {
+        QueryWrapper<NucleicAcidEntity> objectQueryWrapper = new QueryWrapper<NucleicAcidEntity>();
         objectQueryWrapper.eq("uid",params.get("uid"));
         if (params.get("id")!=null) {
             objectQueryWrapper.eq("id",params.get("id"));
         }
 
-        IPage<BodyTemperatureEntity> page = baseDao.selectPage(
+        IPage<NucleicAcidEntity> page = baseDao.selectPage(
                 getPage(params, Constant.CREATE_DATE, false),objectQueryWrapper
         );
-        return getPageData(page, BodyTemperatureEntity.class);
+        return getPageData(page, NucleicAcidEntity.class);
     }
     protected <T> PageData<T> getPageData(List<?> list, long total, Class<T> target){
         List<T> targetList = ConvertUtils.sourceToTarget(list, target);

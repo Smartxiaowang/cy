@@ -228,6 +228,19 @@ t.params.paramCode = '编码'
 t.params.paramValue = '值'
 t.params.remark = '备注'
 
+t.bt = {}
+t.bt.inschool = '是否在校'
+t.bt.id = 'id'
+t.bt.symptom = '症状'
+t.bt.isconfirmed = '是否确诊'
+t.bt.isdanger = '是否密接'
+t.bt.temperature = '体温'
+t.bt.place = '目前所在地'
+t.bt.remake = '其他说明'
+t.bt.createdate = '登记时间'
+
+
+
 t.role = {}
 t.role.name = '名称'
 t.role.remark = '备注'

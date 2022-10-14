@@ -1,6 +1,4 @@
-
 package com.cybs.bs.modules.log.service;
-
 
 import com.cybs.bs.common.utils.BaseService;
 import com.cybs.bs.common.utils.PageData;
@@ -13,7 +11,6 @@ import java.util.Map;
 /**
  * 异常日志
  *
- * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
 public interface SysLogErrorService extends BaseService<SysLogErrorEntity> {
