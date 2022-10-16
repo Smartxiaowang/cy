@@ -3,37 +3,18 @@
                :close-on-press-escape="false">
         <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmitHandle()"
                  label-width="120px">
-            <el-form-item prop="inschool" :label="$t('bt.inschool')">
-                <el-radio v-model="dataForm.inschool" label="是">是</el-radio>
-                <el-radio v-model="dataForm.inschool" label="否">否</el-radio>
+            <el-form-item prop="isunusual" :label="$t('na.isunusual')">
+                <el-radio v-model="dataForm.isunusual" label="阴性">阴性</el-radio>
+                <el-radio v-model="dataForm.isunusual" label="阳性">阳性</el-radio>
                 <!--  <el-input v-model="dataForm.inschool" :placeholder="$t('bt.inschool')"></el-input>-->
-            </el-form-item>
-            <el-form-item prop="symptom" :label="$t('bt.symptom')">
-                <el-input v-model="dataForm.symptom" :placeholder="$t('bt.symptom')"></el-input>
-            </el-form-item>
-            <el-form-item prop="isconfirmed" :label="$t('bt.isconfirmed')">
-                <el-radio v-model="dataForm.isconfirmed" label="是">是</el-radio>
-                <el-radio v-model="dataForm.isconfirmed" label="否">否</el-radio>
-            </el-form-item>
-            <el-form-item prop="isdanger" :label="$t('bt.isdanger')">
-                <el-radio v-model="dataForm.isdanger" label="是">是</el-radio>
-                <el-radio v-model="dataForm.isdanger" label="否">否</el-radio>
-            </el-form-item>
-            <el-form-item prop="temperature" :label="$t('bt.temperature')">
-                <el-input v-model="dataForm.temperature" :placeholder="$t('bt.temperature')"></el-input>
-            </el-form-item>
-            <el-form-item prop="place" :label="$t('bt.place')">
-                <el-input v-model="dataForm.place" :placeholder="$t('bt.place')"></el-input>
             </el-form-item>
             <el-form-item prop="remake" :label="$t('bt.remake')">
                 <el-input v-model="dataForm.remake" :placeholder="$t('bt.remake')"></el-input>
             </el-form-item>
-
-            <el-form-item>
+            <el-form-item :label="$t('na.nucleicacid')">
                 <el-upload action="#" list-type="picture-card"
                            :auto-upload="false"
                            :on-change="handleChange"
-                           :on-preview="handlePreview"
                            :limit="1"
                            :file-list="fileList">
                     <i slot="default" class="el-icon-plus"></i>
@@ -66,6 +47,7 @@
                         type="date"
                         placeholder="选择日期"
                         value-format="yyyy-MM-dd"
+                        :picker-options="pickerOptions0"
                         >
                 </el-date-picker>
             </el-form-item>
@@ -84,6 +66,11 @@
     export default {
         data() {
             return {
+                pickerOptions0:{
+                    disabledDate(time) {
+                        return time.getTime() > Date.now() - 8.64e6;//如果不包括今天。就是return time.getTime() > Date.now() - 24*3600*1000;
+                    }
+                },
                 dialogImageUrl: '',
                 dialogVisible: false,
                 fileList: [],
@@ -92,12 +79,7 @@
                 dataForm: {
                     id: '',
                     nucleicacid:'',
-                    inschool: '',
-                    symptom: '',
-                    isconfirmed: '',
-                    isdanger: '',
-                    temperature: '',
-                    place: '',
+                    isunusual: '',
                     createDate: '',
                     remake: ''
                 }
@@ -144,8 +126,6 @@
             handleChange(file, fileList) {//上传文件变化时
                 this.getBase64(file).then(res =>{
                     this.dataForm.nucleicacid = res;
-                    //console.log(res)
-                    console.log( this.dataForm.nucleicacid)
                 })
             },
             handleRemove(file) {
@@ -179,7 +159,7 @@
                     }
                     if (!this.dataForm.id) {
                         //没id新增
-                       /* this.$http[!this.dataForm.id ? 'post' : 'post']('/saveBodyTemperatureInfo', this.dataForm).then(({data: res}) => {
+                        this.$http[!this.dataForm.id ? 'post' : 'post']('/saveNucleicAcidInfo', this.dataForm).then(({data: res}) => {
                             if (res.code !== 0) {
                                 return this.$message.error(res.message)
                             }
@@ -193,11 +173,11 @@
                                 }
                             })
                         }).catch(() => {
-                        })*/
+                        })
                         console.log(this.dialogImageUrl)
                     } else {
                         //有id修改
-                  /*      this.$http[!this.dataForm.id ? 'post' : 'post']('/updBodyTemInfo', this.dataForm).then(({data: res}) => {
+                        this.$http[!this.dataForm.id ? 'post' : 'post']('/updNucleicAcidInfo', this.dataForm).then(({data: res}) => {
                             if (res.code !== 0) {
                                 return this.$message.error(res.message)
                             }
@@ -211,7 +191,7 @@
                                 }
                             })
                         }).catch(() => {
-                        })*/
+                        })
                     }
                 })
             }, 1000, {'leading': true, 'trailing': false})

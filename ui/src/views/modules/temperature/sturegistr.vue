@@ -14,34 +14,33 @@
                     <el-button @click="getDataList()">{{ $t('query') }}</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="addOrUpdateHandle()">{{ $t('add') }}</el-button>
+                    <el-button v-if="$hasPermission('sys:params:save')" type="primary" @click="addOrUpdateHandle()">{{ $t('add') }}</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="danger" @click="deleteHandle()">{{ $t('deleteBatch') }}</el-button>
+                    <el-button v-if="$hasPermission('sys:params:delete')" type="danger" @click="deleteHandle()">{{ $t('deleteBatch') }}</el-button>
                 </el-form-item>
             </el-form>
             <el-table v-loading="dataListLoading" :data="dataList" border @selection-change="dataListSelectionChangeHandle" style="width: 100%;">
                 <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-                <el-table-column prop="id" :label="$t('na.id')" header-align="center" align="center"></el-table-column>
-                <el-table-column prop="nucleicacid" :label="$t('na.nucleicacid')" header-align="center" align="center">
-                    <template slot-scope="scope">
-                        <el-image
-                                style="width: 100px; height: 100px"
-                                :src="scope.row.nucleicacid"
-                              >
-                        </el-image>
-                       <!-- <img :src="scope.row.nucleicacid" alt="" style="width: 100px;height: 100px">-->
-                    </template>
-                </el-table-column>
-                <el-table-column prop="isunusual" :label="$t('na.isunusual')" header-align="center" align="center"></el-table-column>
-                <el-table-column prop="remake" :label="$t('na.remake')" header-align="center" align="center"></el-table-column>
-                <el-table-column prop="createDate" :label="$t('na.createdate')" header-align="center" align="center"></el-table-column>
-                <el-table-column :label="$t('handle')" fixed="right" header-align="center" align="center" width="150">
+                <el-table-column prop="id" :label="$t('bt.id')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="inschool" :label="$t('bt.inschool')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="symptom" :label="$t('bt.symptom')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="isconfirmed" :label="$t('bt.isconfirmed')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="isdanger" :label="$t('bt.isdanger')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="temperature" :label="$t('bt.temperature')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="place" :label="$t('bt.place')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="remake" :label="$t('bt.remake')" header-align="center" align="center"></el-table-column>
+               <!-- <el-table-column prop="uid" :label="$t('bt.uid')" header-align="center" align="center"></el-table-column>
+               --> <el-table-column prop="name" :label="$t('bt.name')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="depart" :label="$t('bt.depart')" header-align="center" align="center"></el-table-column>
+
+                <el-table-column prop="create_date" :label="$t('bt.create_date')" header-align="center" align="center"></el-table-column>
+                <!--<el-table-column :label="$t('handle')" fixed="right" header-align="center" align="center" width="150">
                     <template slot-scope="scope">
                         <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">{{ $t('update') }}</el-button>
                         <el-button type="text" size="small" @click="deleteHandle(scope.row.id)">{{ $t('delete') }}</el-button>
                     </template>
-                </el-table-column>
+                </el-table-column>-->
             </el-table>
             <el-pagination
                     :current-page="page"
@@ -60,7 +59,7 @@
 
 <script>
     import mixinViewModule from '@/mixins/view-module'
-    import AddOrUpdate from './snai-add-or-update'
+    import AddOrUpdate from './registr-add-or-update'
     export default {
         mixins: [mixinViewModule],
         data () {
@@ -71,9 +70,9 @@
                     }
                 },
                 mixinViewModuleOptions: {
-                    getDataListURL: '/getAcidList/',
+                    getDataListURL: '/getBodyTempAllMyStuList',
                     getDataListIsPage: true,
-                    deleteURL: '/delNucleicAcidInfo',
+                    deleteURL: '/delBodyTemInfo',
                     deleteIsBatch: true
                 },
                 dataForm: {

@@ -14,10 +14,10 @@
                     <el-button @click="getDataList()">{{ $t('query') }}</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button v-if="$hasPermission('sys:params:save')" type="primary" @click="addOrUpdateHandle()">{{ $t('add') }}</el-button>
+                    <el-button  type="primary" @click="addOrUpdateHandle()">{{ $t('add') }}</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button v-if="$hasPermission('sys:params:delete')" type="danger" @click="deleteHandle()">{{ $t('deleteBatch') }}</el-button>
+                    <el-button  type="danger" @click="deleteHandle()">{{ $t('deleteBatch') }}</el-button>
                 </el-form-item>
             </el-form>
             <el-table v-loading="dataListLoading" :data="dataList" border @selection-change="dataListSelectionChangeHandle" style="width: 100%;">

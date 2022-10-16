@@ -13,33 +13,29 @@
                 <el-form-item>
                     <el-button @click="getDataList()">{{ $t('query') }}</el-button>
                 </el-form-item>
-                <el-form-item>
+               <!-- <el-form-item>
                     <el-button type="primary" @click="addOrUpdateHandle()">{{ $t('add') }}</el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="danger" @click="deleteHandle()">{{ $t('deleteBatch') }}</el-button>
-                </el-form-item>
+                </el-form-item>-->
             </el-form>
             <el-table v-loading="dataListLoading" :data="dataList" border @selection-change="dataListSelectionChangeHandle" style="width: 100%;">
                 <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-                <el-table-column prop="id" :label="$t('na.id')" header-align="center" align="center"></el-table-column>
-                <el-table-column prop="nucleicacid" :label="$t('na.nucleicacid')" header-align="center" align="center">
-                    <template slot-scope="scope">
-                        <el-image
-                                style="width: 100px; height: 100px"
-                                :src="scope.row.nucleicacid"
-                              >
-                        </el-image>
-                       <!-- <img :src="scope.row.nucleicacid" alt="" style="width: 100px;height: 100px">-->
-                    </template>
-                </el-table-column>
-                <el-table-column prop="isunusual" :label="$t('na.isunusual')" header-align="center" align="center"></el-table-column>
-                <el-table-column prop="remake" :label="$t('na.remake')" header-align="center" align="center"></el-table-column>
-                <el-table-column prop="createDate" :label="$t('na.createdate')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="id" :label="$t('jc.id')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="departure" :label="$t('jc.departure')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="name" :label="$t('jc.name')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="depart" :label="$t('jc.depart')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="destination" :label="$t('jc.destination')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="departuretime" :label="$t('jc.departuretime')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="destinationtime" :label="$t('jc.destinationtime')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="audit" :label="$t('jc.audit')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="remake" :label="$t('jc.remake')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="create_date" :label="$t('jc.createdate')" header-align="center" align="center"></el-table-column>
                 <el-table-column :label="$t('handle')" fixed="right" header-align="center" align="center" width="150">
                     <template slot-scope="scope">
-                        <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">{{ $t('update') }}</el-button>
-                        <el-button type="text" size="small" @click="deleteHandle(scope.row.id)">{{ $t('delete') }}</el-button>
+                        <el-button type="text" size="small" @click="passInfo(scope.row.id,1)">{{ $t('通过') }}</el-button>
+                        <el-button type="text" size="small" @click="passInfo(scope.row.id,0)">{{ $t('驳回') }}</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -60,9 +56,9 @@
 
 <script>
     import mixinViewModule from '@/mixins/view-module'
-    import AddOrUpdate from './snai-add-or-update'
     export default {
         mixins: [mixinViewModule],
+        inject: ['reload'],
         data () {
             return {
                 pickerOptions0:{
@@ -70,10 +66,11 @@
                         return time.getTime() > Date.now() - 8.64e6;//如果不包括今天。就是return time.getTime() > Date.now() - 24*3600*1000;
                     }
                 },
+                inject:['reload'],
                 mixinViewModuleOptions: {
-                    getDataListURL: '/getAcidList/',
+                    getDataListURL: '/getRegistrationAllMyStuList/',
                     getDataListIsPage: true,
-                    deleteURL: '/delNucleicAcidInfo',
+                    deleteURL: '/delRegistrationInfo',
                     deleteIsBatch: true
                 },
                 dataForm: {
@@ -82,7 +79,26 @@
             }
         },
         components: {
-            AddOrUpdate
+        },
+        methods: {
+            passInfo(id,type) {
+                this.$http[!this.dataForm.id ? 'get' : 'get']('/passRegistrationInfo'+"?id="+id+"&type="+type).then(({ data: res }) => {
+                    if (res.code !== 0) {
+                        return this.$message.error(res.message)
+                    }
+                    this.$message({
+                        message: this.$t('prompt.success'),
+                        type: 'success',
+                        duration: 500,
+
+                        onClose: () => {
+                            this.visible = false
+                            this.$emit('refreshDataList')
+                        }
+                    })
+                    this.reload();
+                }).catch(() => {})
+            }
         }
     }
 </script>

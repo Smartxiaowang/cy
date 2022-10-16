@@ -8,6 +8,7 @@ import '@/icons'
 import '@/element-ui/theme/index.css'
 import '@/assets/scss/aui.scss'
 import http from '@/utils/request'
+import * as echarts from 'echarts';
 import renRadioGroup from '@/components/ren-radio-group'
 import renSelect from '@/components/ren-select'
 import renDeptTree from '@/components/ren-dept-tree'
@@ -16,7 +17,7 @@ import { hasPermission, getDictLabel } from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
 
 Vue.config.productionTip = false
-
+Vue.prototype.$echarts = echarts;
 Vue.use(Element, {
   size: 'default',
   i18n: (key, value) => i18n.t(key, value)

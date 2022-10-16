@@ -16,6 +16,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -87,6 +88,7 @@ public class DateUtils {
      */
     public static Date[] getWeekStartAndEnd(int week) {
         DateTime dateTime = new DateTime();
+
         LocalDate date = new LocalDate(dateTime.plusWeeks(week));
 
         date = date.dayOfWeek().withMinimumValue();
@@ -94,6 +96,38 @@ public class DateUtils {
         Date endDate = date.plusDays(6).toDate();
         return new Date[]{beginDate, endDate};
     }
+    /**
+     * 根据周数，获取开始日期、结束日期
+     * @param   周期  0本周，-1上周，-2上上周，1下周，2下下周
+     * @return  返回date[0]开始日期、date[1]结束日期
+     */
+    public static Date[] getWeekStartAndEndAll() {
+        String format = format(new Date());
+        Date date = parse(format,DATE_PATTERN);
+        Date day1 = addDateDays(date,0);
+        Date day2 = addDateDays(date,-1);
+        Date day3 = addDateDays(date,-2);
+        Date day4 = addDateDays(date,-3);
+        Date day5 = addDateDays(date,-4);
+        Date day6 = addDateDays(date,-5);
+        Date day7 = addDateDays(date,-6);
+        return new Date[]{day1, day2,day3,day4,day5,day6,day7};
+    }
+    public static String[] getDayOfMonth(String date) {
+        int dayOfMonth =getMonthDays(date);
+        return new String[]{date, date+"-01",date+"-"+dayOfMonth,dayOfMonth+""};
+    }
+
+    public static int getMonthDays(String yearMonth) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(sdf.parse(yearMonth));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);}
 
     /**
      * 对日期的【秒】进行加/减

@@ -1,9 +1,15 @@
 import Cookies from 'js-cookie'
 import qs from 'qs'
 export default {
+  provide () {
+    return {
+      reload: this.reload
+    }
+  },
   data () {
     /* eslint-disable */
     return {
+      isShow: true,
       // 设置属性
       mixinViewModuleOptions: {
         createdIsNeed: true,       // 此页面是否在创建时，调用查询数据列表接口？
@@ -40,6 +46,9 @@ export default {
     }
   },
   methods: {
+    reload () {
+      this.query();
+    },
     // 获取数据列表
     query () {
       this.dataListLoading = true

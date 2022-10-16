@@ -23,19 +23,21 @@
             <el-table v-loading="dataListLoading" :data="dataList" border @selection-change="dataListSelectionChangeHandle" style="width: 100%;">
                 <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
                 <el-table-column prop="id" :label="$t('na.id')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="name" :label="$t('na.name')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="depart" :label="$t('na.depart')" header-align="center" align="center"></el-table-column>
                 <el-table-column prop="nucleicacid" :label="$t('na.nucleicacid')" header-align="center" align="center">
                     <template slot-scope="scope">
                         <el-image
                                 style="width: 100px; height: 100px"
                                 :src="scope.row.nucleicacid"
-                              >
+                        >
                         </el-image>
-                       <!-- <img :src="scope.row.nucleicacid" alt="" style="width: 100px;height: 100px">-->
+                        <!-- <img :src="scope.row.nucleicacid" alt="" style="width: 100px;height: 100px">-->
                     </template>
                 </el-table-column>
                 <el-table-column prop="isunusual" :label="$t('na.isunusual')" header-align="center" align="center"></el-table-column>
                 <el-table-column prop="remake" :label="$t('na.remake')" header-align="center" align="center"></el-table-column>
-                <el-table-column prop="createDate" :label="$t('na.createdate')" header-align="center" align="center"></el-table-column>
+                <el-table-column prop="create_date" :label="$t('na.createdate')" header-align="center" align="center"></el-table-column>
                 <el-table-column :label="$t('handle')" fixed="right" header-align="center" align="center" width="150">
                     <template slot-scope="scope">
                         <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">{{ $t('update') }}</el-button>
@@ -60,7 +62,6 @@
 
 <script>
     import mixinViewModule from '@/mixins/view-module'
-    import AddOrUpdate from './snai-add-or-update'
     export default {
         mixins: [mixinViewModule],
         data () {
@@ -71,7 +72,7 @@
                     }
                 },
                 mixinViewModuleOptions: {
-                    getDataListURL: '/getAcidList/',
+                    getDataListURL: '/getAcidAllMyStuList/',
                     getDataListIsPage: true,
                     deleteURL: '/delNucleicAcidInfo',
                     deleteIsBatch: true
@@ -82,7 +83,7 @@
             }
         },
         components: {
-            AddOrUpdate
+
         }
     }
 </script>

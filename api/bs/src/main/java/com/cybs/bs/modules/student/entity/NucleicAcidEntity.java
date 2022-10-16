@@ -15,4 +15,6 @@ public class NucleicAcidEntity extends BaseEntity {
     private String nucleicacid;
     private String isunusual;
     private String remake;
+    private String name;
+    private String depart;
 }

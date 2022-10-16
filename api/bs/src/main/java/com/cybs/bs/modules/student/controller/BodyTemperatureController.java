@@ -13,6 +13,7 @@ import com.cybs.bs.modules.security.user.SecurityUser;
 import com.cybs.bs.modules.security.user.UserDetail;
 import com.cybs.bs.modules.student.entity.BodyTemperatureEntity;
 import com.cybs.bs.modules.student.service.BodyTemperatureService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,22 +31,43 @@ public class BodyTemperatureController {
     private BodyTemperatureService bodyService;
     @GetMapping("/getBodyTempByUid")
     //获取体温列表
-    public Result<PageData<BodyTemperatureEntity>> getBodyTemperatureList(@RequestParam(name = "id" ,required = false) Long id) {
+    public Result<PageData<BodyTemperatureEntity>> getBodyTemperatureList(@RequestParam(name = "id" ,required = false) Long id,@RequestParam(name = "date" ,required = false) String date) {
         //登录的用户信息
         UserDetail user = SecurityUser.getUser();
         Map<String, Object> params = new HashMap<>();
         Long uid = user.getId();
         params.put("uid", uid);
+        if (StringUtils.isNotEmpty(date)) {
+            params.put("date",date);
+        }
         if (id != null )
             params.put("id",id);
         PageData<BodyTemperatureEntity> page = bodyService.page(params);
         return new Result<PageData<BodyTemperatureEntity>>().ok(page);
     }
+
+    @GetMapping("/getBodyTempAllMyStuList")
+    //获取体温列表
+    public Result<HashMap<String, Object>> getBodyTempAllMyStuList(@RequestParam(name = "date",required = false) String date) {
+        //登录的用户信息
+        UserDetail user = SecurityUser.getUser();
+        Map<String, Object> params = new HashMap<>();
+        Long uid = user.getId();
+        params.put("uid", uid);
+        params.put("date", date);
+        //PageData<BodyTemperatureEntity> page = bodyService.page(params);
+        List<HashMap> dataList = bodyService.getBodyTempAllMyStuList(params);
+        HashMap<String, Object> stringObjectHashMap = new HashMap<>();
+        stringObjectHashMap.put("total",dataList.size());
+        stringObjectHashMap.put("list",dataList);
+        return new Result<HashMap<String, Object>>().ok(stringObjectHashMap);
+    }
+
     @LogOperation("新增体温登记信息")
     @PostMapping("/saveBodyTemperatureInfo")
     public R saveOwnerInfo(@RequestBody BodyTemperatureEntity bodyTemperatureEntity) {
-       // BodyTemperatureEntity bodyTemperatureEntity = JSONObject.parseObject(jsonstr, BodyTemperatureEntity.class);
         Long userId = SecurityUser.getUserId();
+        bodyTemperatureEntity.setName(SecurityUser.getUser().getRealName());
         bodyTemperatureEntity.setUid(SecurityUser.getUserId());
         bodyTemperatureEntity.setCreator(userId);
         return  bodyService.insertByEntity(bodyTemperatureEntity);

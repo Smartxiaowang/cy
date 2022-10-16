@@ -1,27 +1,27 @@
 package com.cybs.bs.modules.student.dao;
 
 import com.cybs.bs.common.dao.BaseDao;
-
-import com.cybs.bs.modules.student.entity.NucleicAcidEntity;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import com.cybs.bs.modules.student.entity.RegistrationEntity;
+import org.apache.ibatis.annotations.*;
 
 import java.util.HashMap;
 import java.util.List;
 
 @Mapper
-public interface NucleicAcidDao extends BaseDao<NucleicAcidEntity> {
+public interface RegistrationDao extends BaseDao<RegistrationEntity> {
 
-    @Insert("insert into nucleic_acid values ( null, #{uid}, #{nucleicacid}, #{isunusual},#{remake}, #{creator}, #{createDate},#{name},#{depart} )")
-    void insertEntity(NucleicAcidEntity nucleicAcidEntity);
+
+    @Insert("INSERT INTO journey_registration ( id, uid, departure," +
+            " destination, departuretime, destinationtime, audit, remake, creator, create_date,name,depart )" +
+            "   VALUES (null,#{uid}, #{departure}, #{destination}," +
+            " #{departuretime}, #{destinationtime},\"未审核\",#{remake},#{creator},#{createDate},#{name},#{depart})")
+    void insertEntity(RegistrationEntity registrationEntity);
 
     @Select("<script>" +
             "SELECT\n" +
             "\t* \n" +
             "FROM\n" +
-            "\tnucleic_acid \n" +
+            "\tjourney_registration \n" +
             "WHERE\n" +
             "\tuid IN (\n" +
             "\tSELECT\n" +
@@ -36,6 +36,9 @@ public interface NucleicAcidDao extends BaseDao<NucleicAcidEntity> {
             "  </if> \n" +
             "\tORDER BY create_date desc LIMIT 0,10" +
             "</script>")
-    List<HashMap> getAcidAllMyStuList(@Param("userid") Long userid,
+    List<HashMap> getregistrationList(@Param("userid") Long userid,
                                       @Param("date") String date);
+
+    @Update("update journey_registration set audit = #{audit} where id = #{id}")
+    void updateByUserId(@Param("id")Long id,@Param("audit") String audit);
 }
