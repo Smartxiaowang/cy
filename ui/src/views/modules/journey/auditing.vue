@@ -13,6 +13,8 @@
                 <el-form-item>
                     <el-button @click="getDataList()">{{ $t('query') }}</el-button>
                 </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="exportExcel">导出Excel</el-button>   </el-form-item>
                <!-- <el-form-item>
                     <el-button type="primary" @click="addOrUpdateHandle()">{{ $t('add') }}</el-button>
                 </el-form-item>
@@ -81,6 +83,45 @@
         components: {
         },
         methods: {
+            exportExcel() {
+                let list = [];
+                if (this.dataListSelections.length >0){
+                    //如图我选择了导出那几条数据则导出我需要导出的数据（this.selectRows表示我选中导出数据的数组）
+                    list =this.dataListSelections  //选择导出部分代码
+                    this.exportList(list);
+                }else {
+                    this.$message.error('请选择要导出的内容！');
+                    return false;
+                }
+
+            },
+
+            exportList(list){
+                let tableData = [
+                    ['序号','姓名','所属', '出发地','目的地', '出行时间',"回来时间","审核情况","备注","登记时间"]//导出表头
+                ] // 表格表头
+                list.forEach ((item,index)=> {
+                    let rowData = []
+                    //导出内容的字段
+                    rowData = [
+                        index+1,
+                        item.name,
+                        item.depart,
+                        item.departure,
+                        item.destination,
+                        item.departuretime,
+                        item.destinationtime,
+                        item.audit,
+                        item.remake,
+                        item.create_date
+                    ]
+                    tableData.push(rowData)
+                })
+                let ws = this.XLSX.utils.aoa_to_sheet(tableData)
+                let wb = this.XLSX.utils.book_new()
+                this.XLSX.utils.book_append_sheet(wb, ws, '行程报备审核表') // 工作簿名称
+                this.XLSX.writeFile(wb, '行程报备审核表.xlsx') // 保存的文件名
+            },
             passInfo(id,type) {
                 this.$http[!this.dataForm.id ? 'get' : 'get']('/passRegistrationInfo'+"?id="+id+"&type="+type).then(({ data: res }) => {
                     if (res.code !== 0) {

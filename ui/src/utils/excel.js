@@ -1,5 +1,5 @@
 import FileSaver from "file-saver";
-import XLSX from "xlsx";
+import * as XLSX from 'xlsx/xlsx.mjs'
 
 const toExcel= {
     getExcel(dom,title='默认标题',){

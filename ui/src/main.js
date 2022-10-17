@@ -7,6 +7,8 @@ import store from '@/store'
 import '@/icons'
 import '@/element-ui/theme/index.css'
 import '@/assets/scss/aui.scss'
+import FileSaver from "file-saver";
+import * as XLSX from 'xlsx/xlsx.mjs'
 import http from '@/utils/request'
 import * as echarts from 'echarts';
 import renRadioGroup from '@/components/ren-radio-group'
@@ -15,6 +17,9 @@ import renDeptTree from '@/components/ren-dept-tree'
 import renRegionTree from '@/components/ren-region-tree'
 import { hasPermission, getDictLabel } from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
+
+
+Vue.prototype.XLSX = XLSX
 
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts;

@@ -14,11 +14,7 @@
                     <el-button @click="getDataList()">{{ $t('query') }}</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button v-if="$hasPermission('sys:params:save')" type="primary" @click="addOrUpdateHandle()">{{ $t('add') }}</el-button>
-                </el-form-item>
-                <el-form-item>
-                    <el-button v-if="$hasPermission('sys:params:delete')" type="danger" @click="deleteHandle()">{{ $t('deleteBatch') }}</el-button>
-                </el-form-item>
+                    <el-button type="primary" @click="exportExcel">导出Excel</el-button>   </el-form-item>
             </el-form>
             <el-table v-loading="dataListLoading" :data="dataList" border @selection-change="dataListSelectionChangeHandle" style="width: 100%;">
                 <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
@@ -82,6 +78,48 @@
         },
         components: {
             AddOrUpdate
+        },
+        methods:{
+            exportExcel() {
+                let list = [];
+                if (this.dataListSelections.length >0){
+                    //如图我选择了导出那几条数据则导出我需要导出的数据（this.selectRows表示我选中导出数据的数组）
+                    list =this.dataListSelections  //选择导出部分代码
+                    this.exportList(list);
+                }else {
+                    this.$message.error('请选择要导出的内容！');
+                    return false;
+                }
+
+            },
+
+            exportList(list){
+                let tableData = [
+                    ['序号','是否在校','症状', '是否确诊','是否密接', '体温',"目前所在地","其他说明","姓名","所属","登记时间"]//导出表头
+                ] // 表格表头
+                list.forEach ((item,index)=> {
+                    let rowData = []
+                    //导出内容的字段
+                    rowData = [
+                        index+1,
+                        item.inschool,
+                        item.symptom,
+                        item.isconfirmed,
+                        item.isdanger,
+                        item.temperature,
+                        item.place,
+                        item.remake,
+                        item.name,
+                        item.depart,
+                        item.create_date
+                    ]
+                    tableData.push(rowData)
+                })
+                let ws = this.XLSX.utils.aoa_to_sheet(tableData)
+                let wb = this.XLSX.utils.book_new()
+                this.XLSX.utils.book_append_sheet(wb, ws, '本班学生体温登记表') // 工作簿名称
+                this.XLSX.writeFile(wb, '本班学生体温登记表.xlsx') // 保存的文件名
+            }
         }
     }
 </script>
