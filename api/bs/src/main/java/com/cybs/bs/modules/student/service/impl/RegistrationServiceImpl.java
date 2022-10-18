@@ -28,15 +28,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * @ClassName RegistrationServiceImpl
+ * @Description 行程登记报备实现类
+ * @Version 1.0
+ **/
 @Service
 public class RegistrationServiceImpl extends BaseServiceImpl<RegistrationDao, RegistrationEntity> implements RegistrationService {
+
     @Autowired
     private RegistrationDao registrationDao;
 
 
     @Override
     @Transactional
+    //审核
     public void pass(Long id, int type) {
         String audit = "通过";
         if (type == 0) {
@@ -46,7 +52,9 @@ public class RegistrationServiceImpl extends BaseServiceImpl<RegistrationDao, Re
     }
 
     @Override
+    //获取我班级里学生的行程登记信息
     public List<HashMap> getRegistrationAllMyStuList(Map<String, Object> params) {
+        //构造参数
         Long userid = (Long) params.get("uid");
         String date = (String) params.get("date");
         if (StringUtils.isNotEmpty(date)) {
@@ -57,20 +65,26 @@ public class RegistrationServiceImpl extends BaseServiceImpl<RegistrationDao, Re
         } else {
             date = null;
         }
+        //操作数据库进行交互
         List<HashMap> registrationList = registrationDao.getregistrationList(userid, date);
         return registrationList;
     }
 
     @Override
+    //插入数据
     public void insertEntity(RegistrationEntity registrationEntity) {
-        //registrationDao.insert(registrationEntity);
         String dname = registrationDao.getDepartName(SecurityUser.getDeptId());
+        //获取部门名字
         registrationEntity.setDepart(dname);
+        //设置部门名字
         registrationDao.insertEntity(registrationEntity);
+        //插入数据
     }
 
     @Override
+    //查询数据列表
     public PageData<RegistrationEntity> page(Map<String, Object> params) {
+        //构造参数
         QueryWrapper<RegistrationEntity> objectQueryWrapper = new QueryWrapper<RegistrationEntity>();
         objectQueryWrapper.eq("uid", params.get("uid"));
         if (params.get("id") != null) {
@@ -83,7 +97,7 @@ public class RegistrationServiceImpl extends BaseServiceImpl<RegistrationDao, Re
             date = simpleDateFormat.format(DateUtils.addDateDays(parse, 1));
             objectQueryWrapper.eq("create_date", date);
         }
-
+        //构造结束 查询数据
         IPage<RegistrationEntity> page = baseDao.selectPage(
                 getPage(params, Constant.CREATE_DATE, false), objectQueryWrapper
         );

@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2018 人人开源 All rights reserved.
- *
- * https://www.renren.io
- *
- * 版权所有，侵权必究！
- */
 
 package com.cybs.bs.modules.security.service;
 
@@ -18,7 +11,6 @@ import java.util.Set;
 /**
  * shiro相关接口
  *
- * @author Mark sunlightcs@gmail.com
  */
 public interface ShiroService {
     /**

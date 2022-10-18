@@ -1,4 +1,3 @@
-
 package com.cybs.bs.modules.sys.redis;
 
 import com.cybs.bs.common.redis.RedisKeys;

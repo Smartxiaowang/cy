@@ -12,8 +12,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 /**
  * @ClassName MyRealm
  * @Description Shiro权限
- * @Author Dear lin
- * @Date 20:02 2022/7/15
  * @Version 1.0
  **/
 public class MyRealm extends AuthorizingRealm {

@@ -1,4 +1,3 @@
-
 package com.cybs.bs.modules.sys.service;
 
 import com.cybs.bs.common.utils.BaseService;

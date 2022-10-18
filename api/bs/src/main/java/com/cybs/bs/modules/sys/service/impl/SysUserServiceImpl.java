@@ -1,4 +1,3 @@
-
 package com.cybs.bs.modules.sys.service.impl;
 import com.cybs.bs.common.utils.BaseServiceImpl;
 import com.cybs.bs.common.utils.Constant;
@@ -23,8 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-;
 
 
 /**

@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2018 人人开源 All rights reserved.
- *
- * https://www.renren.io
- *
- * 版权所有，侵权必究！
- */
 
 package com.cybs.bs.modules.security.oauth2;
 
@@ -13,7 +6,6 @@ import org.apache.shiro.authc.AuthenticationToken;
 /**
  * token
  *
- * @author Mark sunlightcs@gmail.com
  */
 public class Oauth2Token implements AuthenticationToken {
     private String token;

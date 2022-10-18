@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2018 人人开源 All rights reserved.
- * <p>
- * https://www.renren.io
- * <p>
- * 版权所有，侵权必究！
- */
 
 package com.cybs.bs.modules.security.service.impl;
 
@@ -26,19 +19,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * 验证码
  *
- * @author Mark sunlightcs@gmail.com
  */
 @Service
 public class CaptchaServiceImpl implements CaptchaService {
-    /* @Override
-     public void create(HttpServletResponse response, String uuid) throws IOException {
-
-     }
-
-     @Override
-     public boolean validate(String uuid, String code) {
-         return false;
-     }*/
     @Autowired
     private RedisUtils redisUtils;
     @Value("${renren.redis.open: false}")

@@ -1,4 +1,3 @@
-
 package com.cybs.bs.modules.sys.entity;
 
 import com.cybs.bs.common.utils.BaseEntity;

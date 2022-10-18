@@ -19,7 +19,6 @@
                 <div class="chart" style="height: 600px;width: 600px;" id="main"></div>
             </div>
             <div class="row">
-
             </div>
 
         </el-card>
@@ -33,10 +32,8 @@
     import * as echarts from 'echarts';
     import debounce from 'lodash/debounce'
     export default {
-
         mixins: [mixinViewModule],
         data() {
-
             return {
                 dataForm: {
                     date: ''

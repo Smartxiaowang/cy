@@ -28,10 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @ClassName OwnerServiceImpl
- * @Description TODO
- * @Author Dear lin
- * @Date 17:21 2022/7/29
+ * @ClassName BodyTemperatureServiceImpl
+ * @Description 体温列表实现类
  * @Version 1.0
  **/
 @Service
@@ -40,7 +38,9 @@ public class BodyTemperatureServiceImpl extends BaseServiceImpl<BodyTemperatureD
     private BodyTemperatureDao bodyTemperatureDao;
 
     @Override
+    //获取我班级学生的体温列表
     public List<HashMap> getBodyTempAllMyStuList(Map<String, Object> params) {
+        //构造查询参数
         Long userid = (Long) params.get("uid");
         String date = (String) params.get("date");
         if (StringUtils.isNotEmpty(date)) {
@@ -51,16 +51,18 @@ public class BodyTemperatureServiceImpl extends BaseServiceImpl<BodyTemperatureD
         }else {
             date = null;
         }
+        //数据库交互
         List<HashMap> bodyTempAllMyStuList = bodyTemperatureDao.getBodyTempAllMyStuList(userid, date);
         return bodyTempAllMyStuList;
     }
 
     @Override
     @Transactional
+    //插入数据
     public R insertByEntity(BodyTemperatureEntity bodyTemperatureEntity) {
         try {
+            //数据库交互
             String dname = bodyTemperatureDao.getDepartName(SecurityUser.getDeptId());
-
             bodyTemperatureEntity.setDepart(dname);
             bodyTemperatureDao.insertbyEntity(bodyTemperatureEntity);
             return R.ok();
@@ -70,7 +72,9 @@ public class BodyTemperatureServiceImpl extends BaseServiceImpl<BodyTemperatureD
     }
 
     @Override
+    //查询列表数据
     public PageData<BodyTemperatureEntity> page(Map<String, Object> params) {
+        //构造参数
         QueryWrapper<BodyTemperatureEntity> objectQueryWrapper = new QueryWrapper<BodyTemperatureEntity>();
         objectQueryWrapper.eq("uid", params.get("uid"));
         if (params.get("id") != null) {
@@ -83,11 +87,12 @@ public class BodyTemperatureServiceImpl extends BaseServiceImpl<BodyTemperatureD
             date = simpleDateFormat.format(DateUtils.addDateDays(parse, 1));
             objectQueryWrapper.eq("create_date", date);
         }
-
+        //获取结果集
         IPage<BodyTemperatureEntity> page = baseDao.selectPage(
                 getPage(params, Constant.CREATE_DATE, false), objectQueryWrapper
         );
         return getPageData(page, BodyTemperatureEntity.class);
+
     }
 
     protected <T> PageData<T> getPageData(List<?> list, long total, Class<T> target) {

@@ -4,9 +4,7 @@ import lombok.Getter;
 
 /**
  * @ClassName R
- * @Description 统一全局返回参数配置枚举
- * @Author Dear lin
- * @Date 17:05 2022/7/14
+ * @Description 统一全局返回参数配置枚举、
  * @Version 1.0
  **/
 @Getter

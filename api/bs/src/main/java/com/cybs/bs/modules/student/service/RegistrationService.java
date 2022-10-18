@@ -7,7 +7,7 @@ import com.cybs.bs.modules.student.entity.RegistrationEntity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//行程报备接口
 public interface RegistrationService extends BaseService<RegistrationEntity> {
     PageData<RegistrationEntity> page(Map<String, Object> params);
 

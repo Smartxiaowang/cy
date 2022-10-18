@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2018 人人开源 All rights reserved.
- *
- * https://www.renren.io
- *
- * 版权所有，侵权必究！
- */
 
 package com.cybs.bs.modules.security.oauth2;
 
@@ -16,8 +9,6 @@ import java.util.UUID;
 
 /*
  * @Description: 生成token
- * @Author: Dear lin
- * @Date: 2022/7/27 14:56
  * @Param:
  * @Return:
  */
