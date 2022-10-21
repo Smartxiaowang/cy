@@ -1,7 +1,7 @@
-export JAR_HOME="/root/project/msproject/api/bs-wx/target"
+export JAR_HOME="/root/project/msproject/api/bs/target"
 git pull origin master
 
-pid=`ps -ef|grep bs-wx.jar|grep -v grep|awk '{print $2}' `
+pid=`ps -ef|grep bs-0.0.1-SNAPSHOT.jar|grep -v grep|awk '{print $2}' `
 is_exist(){
 if [ -z "${pid}" ]; then
 return 1
@@ -22,7 +22,7 @@ echo"删除原有的jar包"
 mvn clean install -Dmaven.test.skip=true -P test
 echo"编译成功"
 cd $JAR_HOME
-nohup java -jar bs-wx.jar >console.log 2>&1 &
+nohup java -jar bs-0.0.1-SNAPSHOT.jar >console.log 2>&1 &
 echo "程序已启动..."
 sleep 3;
 is_exist

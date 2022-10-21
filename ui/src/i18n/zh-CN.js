@@ -3,7 +3,7 @@ const t = {}
 t.loading = '加载中...'
 
 t.brand = {}
-t.brand.lg = '健康校园返校系统'
+t.brand.lg = ''
 t.brand.mini = ''
 
 t.add = '新增'
@@ -71,7 +71,7 @@ t.login.title = '登录'
 t.login.username = '用户名'
 t.login.password = '密码'
 t.login.captcha = '验证码'
-t.login.demo = '上海建桥学院'
+t.login.demo = '关于我'
 t.login.copyright = ''
 
 t.schedule = {}

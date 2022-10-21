@@ -43,7 +43,7 @@
         </div>
         <div class="login-footer">
           <p>
-            <a href="https://www.gench.edu.cn/">{{ $t('login.demo') }}</a>
+            <a href="https://github.com/Smartxiaowang">{{ $t('login.demo') }}</a>
           </p>
         </div>
       </main>

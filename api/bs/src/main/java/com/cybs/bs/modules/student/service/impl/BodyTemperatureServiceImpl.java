@@ -15,17 +15,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import javax.annotation.Resource;
 import java.security.Security;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName BodyTemperatureServiceImpl
@@ -36,6 +35,9 @@ import java.util.Map;
 public class BodyTemperatureServiceImpl extends BaseServiceImpl<BodyTemperatureDao, BodyTemperatureEntity> implements BodyTemperatureService {
     @Autowired
     private BodyTemperatureDao bodyTemperatureDao;
+
+    @Resource
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     //获取我班级学生的体温列表
@@ -86,8 +88,10 @@ public class BodyTemperatureServiceImpl extends BaseServiceImpl<BodyTemperatureD
             Date parse = DateUtils.parse(date, "yyyy-MM-dd");
             date = simpleDateFormat.format(DateUtils.addDateDays(parse, 1));
             objectQueryWrapper.eq("create_date", date);
+
         }
         //获取结果集
+
         IPage<BodyTemperatureEntity> page = baseDao.selectPage(
                 getPage(params, Constant.CREATE_DATE, false), objectQueryWrapper
         );
